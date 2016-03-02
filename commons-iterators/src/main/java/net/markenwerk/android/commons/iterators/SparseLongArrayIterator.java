@@ -25,6 +25,8 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.SparseLongArray;
 
+import net.markenwerk.commons.iterators.Entry;
+
 import java.util.Iterator;
 
 
@@ -41,7 +43,7 @@ import java.util.Iterator;
  * @since 2.0.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-public final class SparseLongArrayIterator implements Iterator<Long> {
+public final class SparseLongArrayIterator implements Iterator<Entry<Integer, Long>> {
 
 	private final SparseLongArray array;
 
@@ -87,9 +89,9 @@ public final class SparseLongArrayIterator implements Iterator<Long> {
 		return array.size() != index + 1;
 	}
 
-	public Long next() {
+	public Entry<Integer, Long> next() {
 		index++;
-		return array.get(array.keyAt(index));
+		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
 	public void remove() {

@@ -25,6 +25,8 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.SparseBooleanArray;
 
+import net.markenwerk.commons.iterators.Entry;
+
 import java.util.Iterator;
 
 
@@ -41,7 +43,7 @@ import java.util.Iterator;
  * @since 2.0.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class SparseBooleanArrayIterator implements Iterator<Boolean> {
+public final class SparseBooleanArrayIterator implements Iterator<Entry<Integer, Boolean>> {
 
 	private final SparseBooleanArray array;
 
@@ -87,9 +89,9 @@ public final class SparseBooleanArrayIterator implements Iterator<Boolean> {
 		return array.size() != index + 1;
 	}
 
-	public Boolean next() {
+	public Entry<Integer, Boolean> next() {
 		index++;
-		return array.get(array.keyAt(index));
+		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
 	public void remove() {
