@@ -19,15 +19,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-//    sourceSets {
-//        defaultConfig {
-//            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
-//        }
-//    }
+    sourceSets {
+        defaultConfig {
+            testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        }
+    }
 }
 
 dependencies {
-    compile 'net.markenwerk:commons-iterators:2.0.0'
+    compile 'net.markenwerk:commons-iterators:2.0.1'
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.4'
 }
