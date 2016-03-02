@@ -25,6 +25,8 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.LongSparseArray;
 
+import net.markenwerk.commons.iterators.Entry;
+
 import java.util.Iterator;
 
 
@@ -42,7 +44,7 @@ import java.util.Iterator;
  * @since 2.0.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class LongSparseArrayIterator<Payload> implements Iterator<Payload> {
+public final class LongSparseArrayIterator<Payload> implements Iterator<Entry<Long, Payload>> {
 
 	private final LongSparseArray<Payload> array;
 
@@ -88,9 +90,9 @@ public final class LongSparseArrayIterator<Payload> implements Iterator<Payload>
 		return array.size() != index + 1;
 	}
 
-	public Payload next() {
+	public Entry<Long, Payload> next() {
 		index++;
-		return array.get(array.keyAt(index));
+		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
 	public void remove() {
