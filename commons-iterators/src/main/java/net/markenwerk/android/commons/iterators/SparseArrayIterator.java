@@ -25,6 +25,8 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.SparseArray;
 
+import net.markenwerk.commons.iterators.Entry;
+
 import java.util.Iterator;
 
 
@@ -90,8 +92,7 @@ public final class SparseArrayIterator<Payload> implements Iterator<Entry<Intege
 
 	public Entry<Integer, Payload> next() {
 		index++;
-		int key = array.keyAt(index);
-		return new Entry<Integer, Payload>(key, array.valueAt(key));
+		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
 	public void remove() {

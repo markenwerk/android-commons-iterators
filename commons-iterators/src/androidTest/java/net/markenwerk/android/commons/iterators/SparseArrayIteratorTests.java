@@ -24,6 +24,8 @@ package net.markenwerk.android.commons.iterators;
 
 import android.util.SparseArray;
 
+import net.markenwerk.commons.iterators.Entry;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -54,15 +56,20 @@ public class SparseArrayIteratorTests {
 	public void iterate() {
 
 		SparseArray<Object> array = new SparseArray<>();
-		array.put(0, new Object());
-		array.put(1, new Object());
+		array.put(23, new Object());
+		array.put(42, new Object());
 
 		Iterator<Entry<Integer, Object>> iterator = new SparseArrayIterator<>(array);
+		Assert.assertTrue(iterator.hasNext());
 
+		Entry<Integer, Object> first = iterator.next();
+		Assert.assertEquals(Integer.valueOf(23), first.getKey());
+		Assert.assertSame(array.valueAt(0), first.getValue());
 		Assert.assertTrue(iterator.hasNext());
-		Assert.assertSame(array.get(0), iterator.next().getValue());
-		Assert.assertTrue(iterator.hasNext());
-		Assert.assertSame(array.get(1), iterator.next().getValue());
+
+		Entry<Integer, Object> second = iterator.next();
+		Assert.assertEquals(Integer.valueOf(42), second.getKey());
+		Assert.assertSame(array.valueAt(1), second.getValue());
 		Assert.assertFalse(iterator.hasNext());
 
 	}
@@ -76,16 +83,14 @@ public class SparseArrayIteratorTests {
 
 		Object replacement = new Object();
 		SparseArray<Object> array = new SparseArray<>();
-		array.put(0, new Object());
+		array.put(23, new Object());
+
 		Iterator<Entry<Integer, Object>> iterator = new SparseArrayIterator<>(array, replacement);
 
-		Assert.assertTrue(iterator.hasNext());
-		Assert.assertSame(array.get(0), iterator.next().getValue());
-		Assert.assertFalse(iterator.hasNext());
-
+		iterator.next();
 		iterator.remove();
 
-		Assert.assertEquals(replacement, array.get(0));
+		Assert.assertEquals(replacement, array.valueAt(0));
 
 	}
 
@@ -96,14 +101,11 @@ public class SparseArrayIteratorTests {
 	public void removeWithoutFallback() {
 
 		SparseArray<Object> array = new SparseArray<>();
-		array.put(0, new Object());
+		array.put(23, new Object());
 
 		Iterator<Entry<Integer, Object>> iterator = new SparseArrayIterator<>(array);
 
-		Assert.assertTrue(iterator.hasNext());
-		Assert.assertSame(array.get(0), iterator.next().getValue());
-		Assert.assertFalse(iterator.hasNext());
-
+		iterator.next();
 		iterator.remove();
 
 	}
