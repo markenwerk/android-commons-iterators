@@ -22,7 +22,6 @@
 package net.markenwerk.android.commons.iterators;
 
 
-import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 
 import net.markenwerk.commons.iterators.Entry;
@@ -82,7 +81,7 @@ public class SparseBooleanArrayIteratorTests {
 	@Test
 	public void removeWithFallback() {
 
-		boolean replacement = true;
+		final boolean replacement = true;
 		SparseBooleanArray array = new SparseBooleanArray();
 		array.put(23, false);
 
