@@ -25,7 +25,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.SparseIntArray;
 
-import net.markenwerk.commons.iterators.Entry;
+import net.markenwerk.commons.datastructures.Entry;
 
 import java.util.Iterator;
 
