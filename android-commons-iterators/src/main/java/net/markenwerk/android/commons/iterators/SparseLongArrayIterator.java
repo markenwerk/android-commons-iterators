@@ -98,7 +98,7 @@ public final class SparseLongArrayIterator implements Iterator<Entry<Integer, Lo
 		if (removable) {
 			array.put(index, replacement);
 		} else {
-			throw new UnsupportedOperationException("cannot remove from SparseLongArrayIterator");
+			throw new UnsupportedOperationException("Cannot remove from SparseLongArrayIterator");
 		}
 	}
 }

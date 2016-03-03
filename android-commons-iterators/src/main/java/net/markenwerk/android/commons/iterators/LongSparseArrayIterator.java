@@ -99,7 +99,7 @@ public final class LongSparseArrayIterator<Payload> implements Iterator<Entry<Lo
 		if (removable) {
 			array.setValueAt(index, replacement);
 		} else {
-			throw new UnsupportedOperationException("cannot remove from LongSparseArrayIterator");
+			throw new UnsupportedOperationException("Cannot remove from LongSparseArrayIterator");
 		}
 	}
 

@@ -98,7 +98,7 @@ public final class SparseBooleanArrayIterator implements Iterator<Entry<Integer,
 		if (removable) {
 			array.put(index, replacement);
 		} else {
-			throw new UnsupportedOperationException("cannot remove from SparseBooleanArrayIterator");
+			throw new UnsupportedOperationException("Cannot remove from SparseBooleanArrayIterator");
 		}
 	}
 }

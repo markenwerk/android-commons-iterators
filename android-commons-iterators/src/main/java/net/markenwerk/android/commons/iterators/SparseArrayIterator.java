@@ -99,7 +99,7 @@ public final class SparseArrayIterator<Payload> implements Iterator<Entry<Intege
 		if (removable) {
 			array.setValueAt(index, replacement);
 		} else {
-			throw new UnsupportedOperationException("cannot remove from SparseArrayIterator");
+			throw new UnsupportedOperationException("Cannot remove from SparseArrayIterator");
 		}
 	}
 }
