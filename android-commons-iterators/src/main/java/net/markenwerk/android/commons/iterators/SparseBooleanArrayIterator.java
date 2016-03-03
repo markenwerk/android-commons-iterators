@@ -28,6 +28,7 @@ import android.util.SparseBooleanArray;
 import net.markenwerk.commons.datastructures.Entry;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 /**
@@ -89,7 +90,10 @@ public final class SparseBooleanArrayIterator implements Iterator<Entry<Integer,
 		return array.size() != index + 1;
 	}
 
-	public Entry<Integer, Boolean> next() {
+	public Entry<Integer, Boolean> next() throws NoSuchElementException {
+		if (!hasNext()) {
+			throw new NoSuchElementException("SparseBooleanArrayIterator has no further element");
+		}
 		index++;
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}

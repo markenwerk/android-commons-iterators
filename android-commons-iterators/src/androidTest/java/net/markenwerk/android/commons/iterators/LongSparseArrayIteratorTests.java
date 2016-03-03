@@ -32,6 +32,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * JUnit test for {@link LongSparseArrayIterator}.
@@ -74,6 +75,18 @@ public class LongSparseArrayIteratorTests {
 		Assert.assertEquals(Long.valueOf(42), second.getKey());
 		Assert.assertSame(array.valueAt(1), second.getValue());
 		Assert.assertFalse(iterator.hasNext());
+
+	}
+
+	/**
+	 * Try iterate over a empty payload array.
+	 */
+	@Test(expected = NoSuchElementException.class)
+	public void iterateEmpty() {
+
+		Iterator<Entry<Long, Object>> iterator = new LongSparseArrayIterator<>(new LongSparseArray<>());
+
+		iterator.next();
 
 	}
 

@@ -28,6 +28,7 @@ import android.util.SparseIntArray;
 import net.markenwerk.commons.datastructures.Entry;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 /**
@@ -89,7 +90,10 @@ public final class SparseIntegerArrayIterator implements Iterator<Entry<Integer,
 		return array.size() != index + 1;
 	}
 
-	public Entry<Integer, Integer> next() {
+	public Entry<Integer, Integer> next() throws NoSuchElementException {
+		if (!hasNext()) {
+			throw new NoSuchElementException("LongIntegerArrayIterator has no further element");
+		}
 		index++;
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}

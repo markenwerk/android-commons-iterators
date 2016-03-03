@@ -30,6 +30,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * JUnit test for {@link SparseBooleanArrayIterator}.
@@ -48,6 +49,9 @@ public class SparseBooleanArrayIteratorTests {
 		new SparseBooleanArrayIterator(null);
 
 	}
+
+
+
 
 	/**
 	 * Iterate over a payload array.
@@ -71,6 +75,19 @@ public class SparseBooleanArrayIteratorTests {
 		Assert.assertEquals(Integer.valueOf(42), second.getKey());
 		Assert.assertSame(array.valueAt(1), second.getValue());
 		Assert.assertFalse(iterator.hasNext());
+
+	}
+
+
+	/**
+	 * Try iterate over a empty payload array.
+	 */
+	@Test(expected = NoSuchElementException.class)
+	public void iterateEmpty() {
+
+		Iterator<Entry<Integer, Boolean>> iterator = new SparseBooleanArrayIterator(new SparseBooleanArray());
+
+		iterator.next();
 
 	}
 
