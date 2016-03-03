@@ -23,59 +23,60 @@ package net.markenwerk.android.commons.iterators;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.util.SparseLongArray;
+import android.util.LongSparseArray;
 
-import net.markenwerk.commons.iterators.Entry;
+import net.markenwerk.commons.datastructures.Entry;
 
 import java.util.Iterator;
 
 
 /**
- * An {@link SparseLongArrayIterator} is a {@link Iterator} that iterates over a given
- * {@link SparseLongArray}.
+ * An {@link LongSparseArrayIterator} is a {@link Iterator} that iterates over a given
+ * {@link LongSparseArray}.
  * <p>
- * Calling {@link SparseLongArrayIterator#remove()} may set the array to the given
+ * Calling {@link LongSparseArrayIterator#remove()} may set the array to the given
  * replacement value at the index that corresponds to the last value returned by
- * {@link SparseLongArrayIterator#next()}.
+ * {@link LongSparseArrayIterator#next()}.
  * </p>
  *
+ * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
  * @since 2.0.0
  */
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-public final class SparseLongArrayIterator implements Iterator<Entry<Integer, Long>> {
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+public final class LongSparseArrayIterator<Payload> implements Iterator<Entry<Long, Payload>> {
 
-	private final SparseLongArray array;
+	private final LongSparseArray<Payload> array;
 
 	private final boolean removable;
 
-	private final Long replacement;
+	private final Payload replacement;
 
 	private int index = -1;
 
 	/**
-	 * Creates a new {@link SparseLongArrayIterator} that iterates over the given {@link SparseLongArray}.
+	 * Creates a new {@link LongSparseArrayIterator} that iterates over the given {@link LongSparseArray}.
 	 *
-	 * @param array The {@link SparseLongArray} to iterate over.
-	 * @throws IllegalArgumentException If the given {@link SparseLongArray} is {@literal null}.
+	 * @param array The {@link LongSparseArray} to iterate over.
+	 * @throws IllegalArgumentException If the given {@link LongSparseArray} is {@literal null}.
 	 */
-	public SparseLongArrayIterator(SparseLongArray array) throws IllegalArgumentException {
+	public LongSparseArrayIterator(LongSparseArray<Payload> array) throws IllegalArgumentException {
 		this(array, false, null);
 	}
 
 	/**
-	 * Creates a new {@link SparseLongArrayIterator} that iterates over the given {@link SparseLongArray}.
+	 * Creates a new {@link LongSparseArrayIterator} that iterates over the given {@link LongSparseArray}.
 	 *
-	 * @param array       The {@link SparseLongArray} to iterate over.
+	 * @param array       The {@link LongSparseArray} to iterate over.
 	 * @param replacement The value to replace removed values with.
-	 * @throws IllegalArgumentException If the given {@link SparseLongArray} is {@literal null}.
+	 * @throws IllegalArgumentException If the given {@link LongSparseArray} is {@literal null}.
 	 */
-	public SparseLongArrayIterator(SparseLongArray array, long replacement) throws
+	public LongSparseArrayIterator(LongSparseArray<Payload> array, Payload replacement) throws
 		IllegalArgumentException {
 		this(array, true, replacement);
 	}
 
-	private SparseLongArrayIterator(SparseLongArray array, boolean removable, Long replacement) throws
+	private LongSparseArrayIterator(LongSparseArray<Payload> array, boolean removable, Payload replacement) throws
 		IllegalArgumentException {
 		if (null == array) {
 			throw new IllegalArgumentException("array is null");
@@ -89,16 +90,18 @@ public final class SparseLongArrayIterator implements Iterator<Entry<Integer, Lo
 		return array.size() != index + 1;
 	}
 
-	public Entry<Integer, Long> next() {
+	public Entry<Long, Payload> next() {
 		index++;
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
 	public void remove() {
 		if (removable) {
-			array.put(index, replacement);
+			array.setValueAt(index, replacement);
 		} else {
-			throw new UnsupportedOperationException("cannot remove from SparseLongArrayIterator");
+			throw new UnsupportedOperationException("cannot remove from LongSparseArrayIterator");
 		}
 	}
+
+
 }

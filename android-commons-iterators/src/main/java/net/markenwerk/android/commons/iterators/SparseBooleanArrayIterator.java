@@ -23,60 +23,59 @@ package net.markenwerk.android.commons.iterators;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.util.LongSparseArray;
+import android.util.SparseBooleanArray;
 
-import net.markenwerk.commons.iterators.Entry;
+import net.markenwerk.commons.datastructures.Entry;
 
 import java.util.Iterator;
 
 
 /**
- * An {@link LongSparseArrayIterator} is a {@link Iterator} that iterates over a given
- * {@link LongSparseArray}.
+ * An {@link SparseBooleanArrayIterator} is a {@link Iterator} that iterates over a given
+ * {@link SparseBooleanArray}.
  * <p>
- * Calling {@link LongSparseArrayIterator#remove()} may set the array to the given
+ * Calling {@link SparseBooleanArrayIterator#remove()} may set the array to the given
  * replacement value at the index that corresponds to the last value returned by
- * {@link LongSparseArrayIterator#next()}.
+ * {@link SparseBooleanArrayIterator#next()}.
  * </p>
  *
- * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
  * @since 2.0.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class LongSparseArrayIterator<Payload> implements Iterator<Entry<Long, Payload>> {
+public final class SparseBooleanArrayIterator implements Iterator<Entry<Integer, Boolean>> {
 
-	private final LongSparseArray<Payload> array;
+	private final SparseBooleanArray array;
 
 	private final boolean removable;
 
-	private final Payload replacement;
+	private final Boolean replacement;
 
 	private int index = -1;
 
 	/**
-	 * Creates a new {@link LongSparseArrayIterator} that iterates over the given {@link LongSparseArray}.
+	 * Creates a new {@link SparseBooleanArrayIterator} that iterates over the given {@link SparseBooleanArray}.
 	 *
-	 * @param array The {@link LongSparseArray} to iterate over.
-	 * @throws IllegalArgumentException If the given {@link LongSparseArray} is {@literal null}.
+	 * @param array The {@link SparseBooleanArray} to iterate over.
+	 * @throws IllegalArgumentException If the given {@link SparseBooleanArray} is {@literal null}.
 	 */
-	public LongSparseArrayIterator(LongSparseArray<Payload> array) throws IllegalArgumentException {
+	public SparseBooleanArrayIterator(SparseBooleanArray array) throws IllegalArgumentException {
 		this(array, false, null);
 	}
 
 	/**
-	 * Creates a new {@link LongSparseArrayIterator} that iterates over the given {@link LongSparseArray}.
+	 * Creates a new {@link SparseBooleanArrayIterator} that iterates over the given {@link SparseBooleanArray}.
 	 *
-	 * @param array       The {@link LongSparseArray} to iterate over.
+	 * @param array       The {@link SparseBooleanArray} to iterate over.
 	 * @param replacement The value to replace removed values with.
-	 * @throws IllegalArgumentException If the given {@link LongSparseArray} is {@literal null}.
+	 * @throws IllegalArgumentException If the given {@link SparseBooleanArray} is {@literal null}.
 	 */
-	public LongSparseArrayIterator(LongSparseArray<Payload> array, Payload replacement) throws
+	public SparseBooleanArrayIterator(SparseBooleanArray array, boolean replacement) throws
 		IllegalArgumentException {
 		this(array, true, replacement);
 	}
 
-	private LongSparseArrayIterator(LongSparseArray<Payload> array, boolean removable, Payload replacement) throws
+	private SparseBooleanArrayIterator(SparseBooleanArray array, boolean removable, Boolean replacement) throws
 		IllegalArgumentException {
 		if (null == array) {
 			throw new IllegalArgumentException("array is null");
@@ -90,18 +89,16 @@ public final class LongSparseArrayIterator<Payload> implements Iterator<Entry<Lo
 		return array.size() != index + 1;
 	}
 
-	public Entry<Long, Payload> next() {
+	public Entry<Integer, Boolean> next() {
 		index++;
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
 	public void remove() {
 		if (removable) {
-			array.setValueAt(index, replacement);
+			array.put(index, replacement);
 		} else {
-			throw new UnsupportedOperationException("cannot remove from LongSparseArrayIterator");
+			throw new UnsupportedOperationException("cannot remove from SparseBooleanArrayIterator");
 		}
 	}
-
-
 }

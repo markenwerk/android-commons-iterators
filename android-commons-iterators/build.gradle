@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'maven'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group "net.markenwerk.android"
+group "net.markenwerk"
 version "2.0.0"
 
 android {
@@ -65,7 +65,7 @@ android.libraryVariants.all { variant ->
 
 configure(install.repositories.mavenInstaller) {
     pom.project {
-        name "net.markenwerk.android:commons-iterators"
+        name "net.markenwerk:commons-iterators"
         description "Some common iterators for Android"
         url "https://github.com/markenwerk/android-commons-iterators"
         inceptionYear '2016'

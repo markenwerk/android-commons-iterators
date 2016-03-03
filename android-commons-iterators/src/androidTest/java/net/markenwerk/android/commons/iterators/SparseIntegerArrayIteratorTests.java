@@ -25,7 +25,7 @@ package net.markenwerk.android.commons.iterators;
 
 import android.util.SparseIntArray;
 
-import net.markenwerk.commons.iterators.Entry;
+import net.markenwerk.commons.datastructures.Entry;
 
 import org.junit.Assert;
 import org.junit.Test;

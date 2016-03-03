@@ -9,7 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/commons-iterators" />
+            <option value="$PROJECT_DIR$/android-commons-iterators" />
           </set>
         </option>
       </GradleProjectSettings>

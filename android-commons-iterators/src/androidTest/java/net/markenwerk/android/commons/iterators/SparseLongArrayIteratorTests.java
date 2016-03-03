@@ -19,12 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package net.markenwerk.android.commons.iterators;
 
 
-import android.util.SparseBooleanArray;
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.util.SparseLongArray;
 
-import net.markenwerk.commons.iterators.Entry;
+import net.markenwerk.commons.datastructures.Entry;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,11 +35,12 @@ import org.junit.Test;
 import java.util.Iterator;
 
 /**
- * JUnit test for {@link SparseBooleanArrayIterator}.
+ * JUnit test for {@link SparseLongArrayIterator}.
  *
  * @author Torsten Krause (tk at markenwerk dot net)
  */
-public class SparseBooleanArrayIteratorTests {
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+public class SparseLongArrayIteratorTests {
 
 
 	/**
@@ -45,7 +49,7 @@ public class SparseBooleanArrayIteratorTests {
 	@Test(expected = IllegalArgumentException.class)
 	public void iterateNullArray() {
 
-		new SparseBooleanArrayIterator(null);
+		new SparseLongArrayIterator(null);
 
 	}
 
@@ -55,19 +59,19 @@ public class SparseBooleanArrayIteratorTests {
 	@Test
 	public void iterate() {
 
-		SparseBooleanArray array = new SparseBooleanArray();
-		array.put(23, false);
-		array.put(42, true);
+		SparseLongArray array = new SparseLongArray();
+		array.put(23, 23l);
+		array.put(42, 42l);
 
-		Iterator<Entry<Integer, Boolean>> iterator = new SparseBooleanArrayIterator(array);
+		Iterator<Entry<Integer, Long>> iterator = new SparseLongArrayIterator(array);
 		Assert.assertTrue(iterator.hasNext());
 
-		Entry<Integer, Boolean> first = iterator.next();
+		Entry<Integer, Long> first = iterator.next();
 		Assert.assertEquals(Integer.valueOf(23), first.getKey());
 		Assert.assertSame(array.valueAt(0), first.getValue());
 		Assert.assertTrue(iterator.hasNext());
 
-		Entry<Integer, Boolean> second = iterator.next();
+		Entry<Integer, Long> second = iterator.next();
 		Assert.assertEquals(Integer.valueOf(42), second.getKey());
 		Assert.assertSame(array.valueAt(1), second.getValue());
 		Assert.assertFalse(iterator.hasNext());
@@ -81,11 +85,11 @@ public class SparseBooleanArrayIteratorTests {
 	@Test
 	public void removeWithFallback() {
 
-		final boolean replacement = true;
-		SparseBooleanArray array = new SparseBooleanArray();
-		array.put(23, false);
+		long replacement = 42;
+		SparseLongArray array = new SparseLongArray();
+		array.put(23, 23l);
 
-		Iterator<Entry<Integer, Boolean>> iterator = new SparseBooleanArrayIterator(array, replacement);
+		Iterator<Entry<Integer, Long>> iterator = new SparseLongArrayIterator(array, replacement);
 
 		iterator.next();
 		iterator.remove();
@@ -100,10 +104,10 @@ public class SparseBooleanArrayIteratorTests {
 	@Test(expected = UnsupportedOperationException.class)
 	public void removeWithoutFallback() {
 
-		SparseBooleanArray array = new SparseBooleanArray();
-		array.put(23, false);
+		SparseLongArray array = new SparseLongArray();
+		array.put(23, 23l);
 
-		Iterator<Entry<Integer, Boolean>> iterator = new SparseBooleanArrayIterator(array);
+		Iterator<Entry<Integer, Long>> iterator = new SparseLongArrayIterator(array);
 
 		iterator.next();
 		iterator.remove();

@@ -23,60 +23,59 @@ package net.markenwerk.android.commons.iterators;
 
 import android.annotation.TargetApi;
 import android.os.Build;
-import android.util.SparseArray;
+import android.util.SparseLongArray;
 
-import net.markenwerk.commons.iterators.Entry;
+import net.markenwerk.commons.datastructures.Entry;
 
 import java.util.Iterator;
 
 
 /**
- * An {@link SparseArrayIterator} is a {@link Iterator} that iterates over a given
- * {@link SparseArray}.
+ * An {@link SparseLongArrayIterator} is a {@link Iterator} that iterates over a given
+ * {@link SparseLongArray}.
  * <p>
- * Calling {@link SparseArrayIterator#remove()} may set the array to the given
+ * Calling {@link SparseLongArrayIterator#remove()} may set the array to the given
  * replacement value at the index that corresponds to the last value returned by
- * {@link SparseArrayIterator#next()}.
+ * {@link SparseLongArrayIterator#next()}.
  * </p>
  *
- * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
  * @since 2.0.0
  */
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class SparseArrayIterator<Payload> implements Iterator<Entry<Integer, Payload>> {
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+public final class SparseLongArrayIterator implements Iterator<Entry<Integer, Long>> {
 
-	private final SparseArray<Payload> array;
+	private final SparseLongArray array;
 
 	private final boolean removable;
 
-	private final Payload replacement;
+	private final Long replacement;
 
 	private int index = -1;
 
 	/**
-	 * Creates a new {@link SparseArrayIterator} that iterates over the given {@link SparseArray}.
+	 * Creates a new {@link SparseLongArrayIterator} that iterates over the given {@link SparseLongArray}.
 	 *
-	 * @param array The {@link SparseArray} to iterate over.
-	 * @throws IllegalArgumentException If the given {@link SparseArray} is {@literal null}.
+	 * @param array The {@link SparseLongArray} to iterate over.
+	 * @throws IllegalArgumentException If the given {@link SparseLongArray} is {@literal null}.
 	 */
-	public SparseArrayIterator(SparseArray<Payload> array) throws IllegalArgumentException {
+	public SparseLongArrayIterator(SparseLongArray array) throws IllegalArgumentException {
 		this(array, false, null);
 	}
 
 	/**
-	 * Creates a new {@link SparseArrayIterator} that iterates over the given {@link SparseArray}.
+	 * Creates a new {@link SparseLongArrayIterator} that iterates over the given {@link SparseLongArray}.
 	 *
-	 * @param array       The {@link SparseArray} to iterate over.
+	 * @param array       The {@link SparseLongArray} to iterate over.
 	 * @param replacement The value to replace removed values with.
-	 * @throws IllegalArgumentException If the given {@link SparseArray} is {@literal null}.
+	 * @throws IllegalArgumentException If the given {@link SparseLongArray} is {@literal null}.
 	 */
-	public SparseArrayIterator(SparseArray<Payload> array, Payload replacement) throws
+	public SparseLongArrayIterator(SparseLongArray array, long replacement) throws
 		IllegalArgumentException {
 		this(array, true, replacement);
 	}
 
-	private SparseArrayIterator(SparseArray<Payload> array, boolean removable, Payload replacement) throws
+	private SparseLongArrayIterator(SparseLongArray array, boolean removable, Long replacement) throws
 		IllegalArgumentException {
 		if (null == array) {
 			throw new IllegalArgumentException("array is null");
@@ -90,16 +89,16 @@ public final class SparseArrayIterator<Payload> implements Iterator<Entry<Intege
 		return array.size() != index + 1;
 	}
 
-	public Entry<Integer, Payload> next() {
+	public Entry<Integer, Long> next() {
 		index++;
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
 	public void remove() {
 		if (removable) {
-			array.setValueAt(index, replacement);
+			array.put(index, replacement);
 		} else {
-			throw new UnsupportedOperationException("cannot remove from SparseArrayIterator");
+			throw new UnsupportedOperationException("cannot remove from SparseLongArrayIterator");
 		}
 	}
 }

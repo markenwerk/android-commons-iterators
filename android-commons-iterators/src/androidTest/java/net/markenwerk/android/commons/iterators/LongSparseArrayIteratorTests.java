@@ -26,7 +26,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.util.LongSparseArray;
 
-import net.markenwerk.commons.iterators.Entry;
+import net.markenwerk.commons.datastructures.Entry;
 
 import org.junit.Assert;
 import org.junit.Test;
