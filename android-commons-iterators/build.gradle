@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 group "net.markenwerk"
 version "2.0.0"
@@ -27,20 +28,14 @@ android {
 }
 
 dependencies {
-    compile 'net.markenwerk:commons-iterators:2.0.0'
-    compile 'net.markenwerk:commons-datastructures:1.0.0'
+    compile 'net.markenwerk:commons-iterators:2.2.0'
     androidTestCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test:runner:0.4.1'
 }
 
-
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
-}
-
-artifacts {
-    archives sourcesJar
 }
 
 android.libraryVariants.all { variant ->
@@ -62,32 +57,69 @@ android.libraryVariants.all { variant ->
     project.artifacts.add("archives", tasks["${variant.name}JavadocJar"]);
 }
 
+artifacts {
+    archives sourcesJar
+}
 
-configure(install.repositories.mavenInstaller) {
-    pom.project {
-        name "net.markenwerk:commons-iterators"
-        description "Some common iterators for Android"
-        url "https://github.com/markenwerk/android-commons-iterators"
-        inceptionYear '2016'
+signing {
+    sign configurations.archives
+}
 
-        licenses {
-            license {
-                name "MIT License"
-                url 'https://opensource.org/licenses/MIT'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
-        }
 
-        organization {
-            name "Markenwerk – Gesellschaft für markenbildende Maßnahmen mbH"
-            url "http://markenwerk.net/"
-        }
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
 
-        developers {
-            developer {
-                name "Torsten Krause"
-                email "tk@markenwerk.net"
-                organization "Markenwerk – Gesellschaft für markenbildende Maßnahmen mbH"
-                organizationUrl "http://markenwerk.net/"
+            pom.project {
+                name "net.markenwerk:commons-iterators"
+                description "Some common iterators for Android"
+                url "https://github.com/markenwerk/android-commons-iterators"
+                inceptionYear '2016'
+
+                licenses {
+                    license {
+                        name "MIT License"
+                        url 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                organization {
+                    name "Markenwerk – Gesellschaft für markenbildende Maßnahmen mbH"
+                    url "http://markenwerk.net/"
+                }
+
+                developers {
+                    developer {
+                        name "Torsten Krause"
+                        email "tk@markenwerk.net"
+                        organization "Markenwerk – Gesellschaft für markenbildende Maßnahmen mbH"
+                        organizationUrl "http://markenwerk.net/"
+                    }
+                }
+
+                scm {
+                    connection 'scm:git:github:markenwerk/android-commons-iterators.git'
+                    developerConnection 'scm:git:github:markenwerk/android-commons-iterators.git'
+                    url 'https://github.com/markenwerk/android-commons-iterators'
+                }
+
+                ciManagement {
+                    system "Travis CI"
+                    url 'https://travis-ci.org//markenwerk/android-commons-iterators/issues'
+                }
+
+                issueManagement {
+                    system "GitHub Issues"
+                    url 'https://github.com/markenwerk/android-commons-iterators/issues'
+                }
             }
         }
     }
