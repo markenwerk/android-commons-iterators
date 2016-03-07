@@ -40,7 +40,7 @@ This library provides the following [`Iterators`][Iterator] that take existing s
 SparseArray<Foo> sparseArray = ...
 
 // yields every foo from sparseArray
-Iterator<Entry<Integer, Foo>> arraytIterator = new SparseArrayIterator(sparseArray);
+Iterator<Entry<Integer, Foo>> arraytIterator = new SparseArrayIterator<>(sparseArray);
 ```
 
 ### Iterating over other objects
