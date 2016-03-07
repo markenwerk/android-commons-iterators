@@ -47,7 +47,7 @@ import java.util.NoSuchElementException;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public final class SparseArrayIterator<Payload> implements ProtectedIterator<Entry<Integer, Payload>> {
 
-	private final SparseArray<Payload> array;
+	private final SparseArray<? extends Payload> array;
 
 	private int index = -1;
 
@@ -57,7 +57,7 @@ public final class SparseArrayIterator<Payload> implements ProtectedIterator<Ent
 	 * @param array The {@link SparseArray} to iterate over.
 	 * @throws IllegalArgumentException If the given {@link SparseArray} is {@literal null}.
 	 */
-	public SparseArrayIterator(SparseArray<Payload> array) throws IllegalArgumentException {
+	public SparseArrayIterator(SparseArray<? extends Payload> array) throws IllegalArgumentException {
 		if (null == array) {
 			throw new IllegalArgumentException("array is null");
 		}

@@ -47,7 +47,7 @@ import java.util.NoSuchElementException;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public final class LongSparseArrayIterator<Payload> implements ProtectedIterator<Entry<Long, Payload>> {
 
-	private final LongSparseArray<Payload> array;
+	private final LongSparseArray<? extends Payload> array;
 
 	private int index = -1;
 
@@ -57,7 +57,7 @@ public final class LongSparseArrayIterator<Payload> implements ProtectedIterator
 	 * @param array The {@link LongSparseArray} to iterate over.
 	 * @throws IllegalArgumentException If the given {@link LongSparseArray} is {@literal null}.
 	 */
-	public LongSparseArrayIterator(LongSparseArray<Payload> array) throws IllegalArgumentException {
+	public LongSparseArrayIterator(LongSparseArray<? extends Payload> array) throws IllegalArgumentException {
 		if (null == array) {
 			throw new IllegalArgumentException("array is null");
 		}
