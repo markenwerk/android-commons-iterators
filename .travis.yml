@@ -12,7 +12,6 @@ env:
     - ADB_INSTALL_TIMEOUT=4
 
 before_script:
-  - git clone https://github.com/markenwerk/java-commons-iterators.git iterators
   - cd iterators && mvn install && cd ..
   - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &

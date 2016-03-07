@@ -32,7 +32,7 @@ import java.util.NoSuchElementException;
 
 /**
  * An {@link PairIterator} is a {@link Iterator} that iterates over a given
- * {@link Pair}, where both vomponents have a common super type.
+ * {@link Pair}, where both components have a common super type.
  *
  * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
