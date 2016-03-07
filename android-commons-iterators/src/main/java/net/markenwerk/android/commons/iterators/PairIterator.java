@@ -42,7 +42,7 @@ public final class PairIterator<Payload> implements ProtectedIterator<Payload> {
 
 	private final Pair<? extends Payload, ? extends Payload> pair;
 
-	private int index = 0;
+	private int index = -1;
 
 	/**
 	 * Creates a new {@link PairIterator} that iterates over the given {@link Pair}.
@@ -59,11 +59,11 @@ public final class PairIterator<Payload> implements ProtectedIterator<Payload> {
 	}
 
 	public boolean hasNext() {
-		return index < 2;
+		return index < 1;
 	}
 
 	public Payload next() throws NoSuchElementException {
-		switch (index++) {
+		switch (++index) {
 			case 0:
 				return pair.first;
 			case 1:
@@ -74,6 +74,6 @@ public final class PairIterator<Payload> implements ProtectedIterator<Payload> {
 	}
 
 	public void remove() {
-		throw new UnsupportedOperationException("Cannot remove from PairIterator");
+		throw new UnsupportedOperationException("Cannot remove from a PairIterator");
 	}
 }
