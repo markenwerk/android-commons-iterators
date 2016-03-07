@@ -36,7 +36,7 @@ import java.util.NoSuchElementException;
  *
  * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
- * @since 2.0.0
+ * @since 2.2.0
  */
 public final class PairIterator<Payload> implements ProtectedIterator<Payload> {
 

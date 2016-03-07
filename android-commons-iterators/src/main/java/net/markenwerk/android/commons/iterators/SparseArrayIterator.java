@@ -42,7 +42,7 @@ import java.util.NoSuchElementException;
  *
  * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
- * @since 2.0.0
+ * @since 2.2.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public final class SparseArrayIterator<Payload> implements ProtectedIterator<Entry<Integer, Payload>> {
