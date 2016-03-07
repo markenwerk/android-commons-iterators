@@ -26,13 +26,13 @@ import android.os.Build;
 import android.util.SparseLongArray;
 
 import net.markenwerk.commons.datastructures.Entry;
+import net.markenwerk.commons.iterators.ProtectedIterator;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
 /**
- * An {@link SparseLongArrayIterator} is a {@link Iterator} that iterates over a given
+ * An {@link SparseLongArrayIterator} is a {@link ProtectedIterator} that iterates over a given
  * {@link SparseLongArray}.
  * <p>
  * Calling {@link SparseLongArrayIterator#remove()} may set the array to the given
@@ -44,13 +44,9 @@ import java.util.NoSuchElementException;
  * @since 2.0.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-public final class SparseLongArrayIterator implements Iterator<Entry<Integer, Long>> {
+public final class SparseLongArrayIterator implements ProtectedIterator<Entry<Integer, Long>> {
 
 	private final SparseLongArray array;
-
-	private final boolean removable;
-
-	private final Long replacement;
 
 	private int index = -1;
 
@@ -61,29 +57,10 @@ public final class SparseLongArrayIterator implements Iterator<Entry<Integer, Lo
 	 * @throws IllegalArgumentException If the given {@link SparseLongArray} is {@literal null}.
 	 */
 	public SparseLongArrayIterator(SparseLongArray array) throws IllegalArgumentException {
-		this(array, false, null);
-	}
-
-	/**
-	 * Creates a new {@link SparseLongArrayIterator} that iterates over the given {@link SparseLongArray}.
-	 *
-	 * @param array       The {@link SparseLongArray} to iterate over.
-	 * @param replacement The value to replace removed values with.
-	 * @throws IllegalArgumentException If the given {@link SparseLongArray} is {@literal null}.
-	 */
-	public SparseLongArrayIterator(SparseLongArray array, long replacement) throws
-		IllegalArgumentException {
-		this(array, true, replacement);
-	}
-
-	private SparseLongArrayIterator(SparseLongArray array, boolean removable, Long replacement) throws
-		IllegalArgumentException {
 		if (null == array) {
 			throw new IllegalArgumentException("array is null");
 		}
 		this.array = array;
-		this.removable = removable;
-		this.replacement = replacement;
 	}
 
 	public boolean hasNext() {
@@ -98,11 +75,7 @@ public final class SparseLongArrayIterator implements Iterator<Entry<Integer, Lo
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
-	public void remove() {
-		if (removable) {
-			array.put(index, replacement);
-		} else {
-			throw new UnsupportedOperationException("Cannot remove from SparseLongArrayIterator");
-		}
+	public void remove() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Cannot remove from a SparseLongArrayIterator");
 	}
 }

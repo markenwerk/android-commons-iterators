@@ -44,7 +44,7 @@ public class SparseArrayIteratorTests {
 	 * Iterate over a {@code null} array.
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void iterateNullArray() {
+	public void create_nullArray() {
 
 		new SparseArrayIterator<>(null);
 
@@ -79,7 +79,7 @@ public class SparseArrayIteratorTests {
 	 * Try iterate over a empty payload array.
 	 */
 	@Test(expected = NoSuchElementException.class)
-	public void iterateEmpty() {
+	public void iterate_noNext() {
 
 		Iterator<Entry<Integer, Object>> iterator = new SparseArrayIterator<>(new SparseArray<>());
 
@@ -87,32 +87,11 @@ public class SparseArrayIteratorTests {
 
 	}
 
-
-
-	/**
-	 * Remove a value in a {@code short[]}.
-	 */
-	@Test
-	public void removeWithFallback() {
-
-		Object replacement = new Object();
-		SparseArray<Object> array = new SparseArray<>();
-		array.put(23, new Object());
-
-		Iterator<Entry<Integer, Object>> iterator = new SparseArrayIterator<>(array, replacement);
-
-		iterator.next();
-		iterator.remove();
-
-		Assert.assertEquals(replacement, array.valueAt(0));
-
-	}
-
 	/**
 	 * Remove a value in a {@code short[]}.
 	 */
 	@Test(expected = UnsupportedOperationException.class)
-	public void removeWithoutFallback() {
+	public void remove() {
 
 		SparseArray<Object> array = new SparseArray<>();
 		array.put(23, new Object());

@@ -26,13 +26,13 @@ import android.os.Build;
 import android.util.LongSparseArray;
 
 import net.markenwerk.commons.datastructures.Entry;
+import net.markenwerk.commons.iterators.ProtectedIterator;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
 /**
- * An {@link LongSparseArrayIterator} is a {@link Iterator} that iterates over a given
+ * An {@link LongSparseArrayIterator} is a {@link ProtectedIterator} that iterates over a given
  * {@link LongSparseArray}.
  * <p>
  * Calling {@link LongSparseArrayIterator#remove()} may set the array to the given
@@ -45,13 +45,9 @@ import java.util.NoSuchElementException;
  * @since 2.0.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class LongSparseArrayIterator<Payload> implements Iterator<Entry<Long, Payload>> {
+public final class LongSparseArrayIterator<Payload> implements ProtectedIterator<Entry<Long, Payload>> {
 
 	private final LongSparseArray<Payload> array;
-
-	private final boolean removable;
-
-	private final Payload replacement;
 
 	private int index = -1;
 
@@ -62,29 +58,10 @@ public final class LongSparseArrayIterator<Payload> implements Iterator<Entry<Lo
 	 * @throws IllegalArgumentException If the given {@link LongSparseArray} is {@literal null}.
 	 */
 	public LongSparseArrayIterator(LongSparseArray<Payload> array) throws IllegalArgumentException {
-		this(array, false, null);
-	}
-
-	/**
-	 * Creates a new {@link LongSparseArrayIterator} that iterates over the given {@link LongSparseArray}.
-	 *
-	 * @param array       The {@link LongSparseArray} to iterate over.
-	 * @param replacement The value to replace removed values with.
-	 * @throws IllegalArgumentException If the given {@link LongSparseArray} is {@literal null}.
-	 */
-	public LongSparseArrayIterator(LongSparseArray<Payload> array, Payload replacement) throws
-		IllegalArgumentException {
-		this(array, true, replacement);
-	}
-
-	private LongSparseArrayIterator(LongSparseArray<Payload> array, boolean removable, Payload replacement) throws
-		IllegalArgumentException {
 		if (null == array) {
 			throw new IllegalArgumentException("array is null");
 		}
 		this.array = array;
-		this.removable = removable;
-		this.replacement = replacement;
 	}
 
 	public boolean hasNext() {
@@ -99,12 +76,8 @@ public final class LongSparseArrayIterator<Payload> implements Iterator<Entry<Lo
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
-	public void remove() {
-		if (removable) {
-			array.setValueAt(index, replacement);
-		} else {
-			throw new UnsupportedOperationException("Cannot remove from LongSparseArrayIterator");
-		}
+	public void remove() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Cannot remove from a LongSparseArrayIterator");
 	}
 
 

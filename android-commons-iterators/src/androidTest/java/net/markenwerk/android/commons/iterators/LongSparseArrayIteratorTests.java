@@ -47,7 +47,7 @@ public class LongSparseArrayIteratorTests {
 	 * Iterate over a {@code null} array.
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void iterateNullArray() {
+	public void create_nullArray() {
 
 		new LongSparseArrayIterator<>(null);
 
@@ -82,7 +82,7 @@ public class LongSparseArrayIteratorTests {
 	 * Try iterate over a empty payload array.
 	 */
 	@Test(expected = NoSuchElementException.class)
-	public void iterateEmpty() {
+	public void iterate_noNext() {
 
 		Iterator<Entry<Long, Object>> iterator = new LongSparseArrayIterator<>(new LongSparseArray<>());
 
@@ -90,38 +90,17 @@ public class LongSparseArrayIteratorTests {
 
 	}
 
-
-	/**
-	 * Remove a value in a {@code short[]}.
-	 */
-	@Test
-	public void removeWithFallback() {
-
-		Object replacement = new Object();
-		LongSparseArray<Object> array = new LongSparseArray<>();
-		array.put(23, new Object());
-
-		Iterator<Entry<Long, Object>> iterator = new LongSparseArrayIterator<>(array, replacement);
-
-		iterator.next();
-		iterator.remove();
-
-		Assert.assertEquals(replacement, array.valueAt(0));
-
-	}
-
 	/**
 	 * Remove a value in a {@code short[]}.
 	 */
 	@Test(expected = UnsupportedOperationException.class)
-	public void removeWithoutFallback() {
+	public void remove() {
 
 		LongSparseArray<Object> array = new LongSparseArray<>();
 		array.put(23, new Object());
 
 		Iterator<Entry<Long, Object>> iterator = new LongSparseArrayIterator<>(array);
 
-		iterator.next();
 		iterator.remove();
 
 	}

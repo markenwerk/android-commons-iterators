@@ -26,13 +26,13 @@ import android.os.Build;
 import android.util.SparseBooleanArray;
 
 import net.markenwerk.commons.datastructures.Entry;
+import net.markenwerk.commons.iterators.ProtectedIterator;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
 /**
- * An {@link SparseBooleanArrayIterator} is a {@link Iterator} that iterates over a given
+ * An {@link SparseBooleanArrayIterator} is a {@link ProtectedIterator} that iterates over a given
  * {@link SparseBooleanArray}.
  * <p>
  * Calling {@link SparseBooleanArrayIterator#remove()} may set the array to the given
@@ -44,13 +44,9 @@ import java.util.NoSuchElementException;
  * @since 2.0.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class SparseBooleanArrayIterator implements Iterator<Entry<Integer, Boolean>> {
+public final class SparseBooleanArrayIterator implements ProtectedIterator<Entry<Integer, Boolean>> {
 
 	private final SparseBooleanArray array;
-
-	private final boolean removable;
-
-	private final Boolean replacement;
 
 	private int index = -1;
 
@@ -61,29 +57,10 @@ public final class SparseBooleanArrayIterator implements Iterator<Entry<Integer,
 	 * @throws IllegalArgumentException If the given {@link SparseBooleanArray} is {@literal null}.
 	 */
 	public SparseBooleanArrayIterator(SparseBooleanArray array) throws IllegalArgumentException {
-		this(array, false, null);
-	}
-
-	/**
-	 * Creates a new {@link SparseBooleanArrayIterator} that iterates over the given {@link SparseBooleanArray}.
-	 *
-	 * @param array       The {@link SparseBooleanArray} to iterate over.
-	 * @param replacement The value to replace removed values with.
-	 * @throws IllegalArgumentException If the given {@link SparseBooleanArray} is {@literal null}.
-	 */
-	public SparseBooleanArrayIterator(SparseBooleanArray array, boolean replacement) throws
-		IllegalArgumentException {
-		this(array, true, replacement);
-	}
-
-	private SparseBooleanArrayIterator(SparseBooleanArray array, boolean removable, Boolean replacement) throws
-		IllegalArgumentException {
 		if (null == array) {
 			throw new IllegalArgumentException("array is null");
 		}
 		this.array = array;
-		this.removable = removable;
-		this.replacement = replacement;
 	}
 
 	public boolean hasNext() {
@@ -98,11 +75,7 @@ public final class SparseBooleanArrayIterator implements Iterator<Entry<Integer,
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
-	public void remove() {
-		if (removable) {
-			array.put(index, replacement);
-		} else {
-			throw new UnsupportedOperationException("Cannot remove from SparseBooleanArrayIterator");
-		}
+	public void remove() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("Cannot remove from a SparseBooleanArrayIterator");
 	}
 }
