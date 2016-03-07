@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: 'org.ajoberstar.github-pages'
 
 group "net.markenwerk"
 version "2.0.0"
@@ -44,6 +45,7 @@ android.libraryVariants.all { variant ->
         ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
         classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
         options.linksOffline("http://d.android.com/reference", "${android.sdkDirectory}/docs/reference")
+        options.links("https://markenwerk.github.io/java-commons-datastructures")
         options.links("https://markenwerk.github.io/java-commons-interfaces")
         options.links("https://markenwerk.github.io/java-commons-iterators")
         options.noTimestamp = true
@@ -63,6 +65,16 @@ artifacts {
 
 signing {
     sign configurations.archives
+}
+
+afterEvaluate {
+    githubPages {
+        repoUri = "git@github.com:markenwerk/android-commons-iterators"
+        pages {
+            from tasks.getByName("releaseJavadoc").outputs.files
+        }
+        publishGhPages.dependsOn(tasks.getByName("releaseJavadoc"))
+    }
 }
 
 uploadArchives {
