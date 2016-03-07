@@ -7,12 +7,12 @@
 
 ## Overview
 
-This is a collection of companion iterators for [some commonly useful `Iterable` implementations](https://github.com/markenwerk/android-commons-iterables) for the following use cases:
+This is a collection of companion `Iterators` for [some commonly useful `Iterable` implementations](https://github.com/markenwerk/android-commons-iterables) for the following use cases:
 
 - [Iterating over sparse arrays](#iterating-over-sparse-arrays)
 - [Iterating over other objects](#iterating-over-other-objects)
 
-This library is an extended version of [some commonly useful `Iterator` implementations](https://github.com/markenwerk/java-commons-iterators) for Java, that contains `Iterators` for Android specific data structures.
+This library is an extensions of the [corresponding library for Java](https://github.com/markenwerk/java-commons-iterators), that contains `Iterators` for Android specific data structures.
 
 This library is hosted in the [Maven Central Repository](https://maven-badges.herokuapp.com/maven-central/net.markenwerk/android-commons-iterators). You can use it with the following coordinates:
 
