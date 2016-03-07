@@ -44,8 +44,8 @@ Iterator<Entry<Integer, Foo>> arraytIterator = new SparseArrayIterator<>(sparseA
 
 ### Iterating over other objects
 
-This library provides the generic [`PairIterator`][PairIterator] that takes and existing
-[`Pair`][Pair] and yields both contained values.
+This library provides the generic [`PairIterator`][PairIterator] that takes and existing [`Pair`][Pair] and yields
+both contained values.
 
 ```java
 Pair<Foo, Foo> pair = ...
