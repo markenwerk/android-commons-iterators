@@ -1,8 +1,6 @@
 # Some common iterators for Java
 
 [![Build Status](https://travis-ci.org/markenwerk/java-commons-iterators.svg?branch=master)](https://travis-ci.org/markenwerk/java-commons-iterators)
-[![Coverage Status](https://coveralls.io/repos/markenwerk/android-commons-iterators/badge.svg?branch=master&service=github)](https://coveralls.io/github/markenwerk/android-commons-iterators?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/56d813f1d716950040a0ef21/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56d813f1d716950040a0ef21)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.markenwerk/android-commons-iterators/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.markenwerk/android-commons-iterators)
 [![API Level 8](https://img.shields.io/badge/android-API_8-brightgreen.svg)](https://developer.android.com/reference/packages.html)
 [![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/markenwerk/android-commons-iterators/blob/master/LICENSE)
