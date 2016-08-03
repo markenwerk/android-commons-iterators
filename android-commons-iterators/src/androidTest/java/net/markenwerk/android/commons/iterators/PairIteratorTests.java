@@ -30,17 +30,8 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * JUnit test for {@link PairIterator}.
- *
- * @author Torsten Krause (tk at markenwerk dot net)
- */
 public class PairIteratorTests {
 
-
-	/**
-	 * Iterate over a pair.
-	 */
 	@Test
 	public void iterate() {
 
@@ -57,9 +48,6 @@ public class PairIteratorTests {
 
 	}
 
-	/**
-	 * Try iterate over a empty payload array.
-	 */
 	@Test(expected = NoSuchElementException.class)
 	public void iterateWithNoNext() {
 
@@ -71,10 +59,6 @@ public class PairIteratorTests {
 
 	}
 
-
-	/**
-	 * Remove a value in a {@code short[]}.
-	 */
 	@Test(expected = UnsupportedOperationException.class)
 	public void remove() {
 

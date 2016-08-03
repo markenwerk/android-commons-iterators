@@ -34,18 +34,9 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * JUnit test for {@link LongSparseArrayIterator}.
- *
- * @author Torsten Krause (tk at markenwerk dot net)
- */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class LongSparseArrayIteratorTests {
 
-
-	/**
-	 * Iterate over a {@code null} array.
-	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void create_nullArray() {
 
@@ -53,9 +44,6 @@ public class LongSparseArrayIteratorTests {
 
 	}
 
-	/**
-	 * Iterate over a payload array.
-	 */
 	@Test
 	public void iterate() {
 
@@ -78,9 +66,6 @@ public class LongSparseArrayIteratorTests {
 
 	}
 
-	/**
-	 * Try iterate over a empty payload array.
-	 */
 	@Test(expected = NoSuchElementException.class)
 	public void iterate_noNext() {
 
@@ -90,9 +75,6 @@ public class LongSparseArrayIteratorTests {
 
 	}
 
-	/**
-	 * Remove a value in a {@code short[]}.
-	 */
 	@Test(expected = UnsupportedOperationException.class)
 	public void remove() {
 

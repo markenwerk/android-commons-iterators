@@ -26,56 +26,49 @@ import android.os.Build;
 import android.util.SparseBooleanArray;
 
 import net.markenwerk.commons.datastructures.Entry;
-import net.markenwerk.commons.iterators.ProtectedIterator;
+import net.markenwerk.commons.iterators.AbstractProtectedIterator;
 
 import java.util.NoSuchElementException;
 
 
 /**
- * An {@link SparseBooleanArrayIterator} is a {@link ProtectedIterator} that iterates over a given
+ * A {@link SparseBooleanArrayIterator} is an {@link AbstractProtectedIterator} that iterates over a given
  * {@link SparseBooleanArray}.
- * <p>
- * Calling {@link SparseBooleanArrayIterator#remove()} may set the array to the given
- * replacement value at the index that corresponds to the last value returned by
- * {@link SparseBooleanArrayIterator#next()}.
- * </p>
  *
  * @author Torsten Krause (tk at markenwerk dot net)
  * @since 2.2.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class SparseBooleanArrayIterator implements ProtectedIterator<Entry<Integer, Boolean>> {
+public final class SparseBooleanArrayIterator extends AbstractProtectedIterator<Entry<Integer, Boolean>> {
 
 	private final SparseBooleanArray array;
 
-	private int index = -1;
+	private int index;
 
 	/**
-	 * Creates a new {@link SparseBooleanArrayIterator} that iterates over the given {@link SparseBooleanArray}.
+	 * Creates a new {@link SparseBooleanArrayIterator}.
 	 *
 	 * @param array The {@link SparseBooleanArray} to iterate over.
 	 * @throws IllegalArgumentException If the given {@link SparseBooleanArray} is {@literal null}.
 	 */
 	public SparseBooleanArrayIterator(SparseBooleanArray array) throws IllegalArgumentException {
 		if (null == array) {
-			throw new IllegalArgumentException("array is null");
+			throw new IllegalArgumentException("The given array is null");
 		}
 		this.array = array;
 	}
 
 	public boolean hasNext() {
-		return array.size() != index + 1;
+		return index < array.size();
 	}
 
 	public Entry<Integer, Boolean> next() throws NoSuchElementException {
 		if (!hasNext()) {
-			throw new NoSuchElementException("SparseBooleanArrayIterator has no further element");
+			throw new NoSuchElementException("This iterator has no next element");
 		}
-		index++;
+		int index = this.index++;
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
-	public void remove() throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("Cannot remove from a SparseBooleanArrayIterator");
-	}
+
 }

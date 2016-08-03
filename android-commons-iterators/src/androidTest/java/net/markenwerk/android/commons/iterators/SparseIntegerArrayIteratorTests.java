@@ -33,17 +33,8 @@ import org.junit.Test;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/**
- * JUnit test for {@link SparseIntegerArrayIterator}.
- *
- * @author Torsten Krause (tk at markenwerk dot net)
- */
 public class SparseIntegerArrayIteratorTests {
 
-
-	/**
-	 * Iterate over a {@code null} array.
-	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void iterate_nullArray() {
 
@@ -51,9 +42,6 @@ public class SparseIntegerArrayIteratorTests {
 
 	}
 
-	/**
-	 * Iterate over a payload array.
-	 */
 	@Test
 	public void iterate() {
 
@@ -76,9 +64,6 @@ public class SparseIntegerArrayIteratorTests {
 
 	}
 
-	/**
-	 * Try iterate over a empty payload array.
-	 */
 	@Test(expected = NoSuchElementException.class)
 	public void iterate_noNext() {
 
@@ -88,9 +73,6 @@ public class SparseIntegerArrayIteratorTests {
 
 	}
 
-	/**
-	 * Remove a value in a {@code short[]}.
-	 */
 	@Test(expected = UnsupportedOperationException.class)
 	public void remove() {
 

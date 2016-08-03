@@ -26,57 +26,49 @@ import android.os.Build;
 import android.util.SparseArray;
 
 import net.markenwerk.commons.datastructures.Entry;
-import net.markenwerk.commons.iterators.ProtectedIterator;
+import net.markenwerk.commons.iterators.AbstractProtectedIterator;
 
 import java.util.NoSuchElementException;
 
 
 /**
- * An {@link SparseArrayIterator} is a {@link ProtectedIterator} that iterates over a given
+ * A {@link SparseArrayIterator} is an {@link AbstractProtectedIterator} that iterates over a given
  * {@link SparseArray}.
- * <p>
- * Calling {@link SparseArrayIterator#remove()} may set the array to the given
- * replacement value at the index that corresponds to the last value returned by
- * {@link SparseArrayIterator#next()}.
- * </p>
  *
  * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
  * @since 2.2.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class SparseArrayIterator<Payload> implements ProtectedIterator<Entry<Integer, Payload>> {
+public final class SparseArrayIterator<Payload> extends AbstractProtectedIterator<Entry<Integer, Payload>> {
 
 	private final SparseArray<? extends Payload> array;
 
-	private int index = -1;
+	private int index;
 
 	/**
-	 * Creates a new {@link SparseArrayIterator} that iterates over the given {@link SparseArray}.
+	 * Creates a new {@link SparseArrayIterator}.
 	 *
 	 * @param array The {@link SparseArray} to iterate over.
 	 * @throws IllegalArgumentException If the given {@link SparseArray} is {@literal null}.
 	 */
 	public SparseArrayIterator(SparseArray<? extends Payload> array) throws IllegalArgumentException {
 		if (null == array) {
-			throw new IllegalArgumentException("array is null");
+			throw new IllegalArgumentException("The given array is null");
 		}
 		this.array = array;
 	}
 
 	public boolean hasNext() {
-		return array.size() != index + 1;
+		return index < array.size();
 	}
 
 	public Entry<Integer, Payload> next() throws NoSuchElementException {
 		if (!hasNext()) {
-			throw new NoSuchElementException("SparseArrayIterator has no further element");
+			throw new NoSuchElementException("This iterator has no next element");
 		}
-		index++;
+		int index = this.index++;
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
 
-	public void remove() throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("Cannot remove from a SparseArrayIterator");
-	}
 }

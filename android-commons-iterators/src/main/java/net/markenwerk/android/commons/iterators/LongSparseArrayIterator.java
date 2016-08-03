@@ -26,59 +26,49 @@ import android.os.Build;
 import android.util.LongSparseArray;
 
 import net.markenwerk.commons.datastructures.Entry;
-import net.markenwerk.commons.iterators.ProtectedIterator;
+import net.markenwerk.commons.iterators.AbstractProtectedIterator;
 
 import java.util.NoSuchElementException;
 
 
 /**
- * An {@link LongSparseArrayIterator} is a {@link ProtectedIterator} that iterates over a given
+ * A {@link LongSparseArrayIterator} is an {@link AbstractProtectedIterator} that iterates over a given
  * {@link LongSparseArray}.
- * <p>
- * Calling {@link LongSparseArrayIterator#remove()} may set the array to the given
- * replacement value at the index that corresponds to the last value returned by
- * {@link LongSparseArrayIterator#next()}.
- * </p>
  *
  * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
  * @since 2.2.0
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public final class LongSparseArrayIterator<Payload> implements ProtectedIterator<Entry<Long, Payload>> {
+public final class LongSparseArrayIterator<Payload> extends AbstractProtectedIterator<Entry<Long, Payload>> {
 
 	private final LongSparseArray<? extends Payload> array;
 
 	private int index = -1;
 
 	/**
-	 * Creates a new {@link LongSparseArrayIterator} that iterates over the given {@link LongSparseArray}.
+	 * Creates a new {@link LongSparseArrayIterator}.
 	 *
 	 * @param array The {@link LongSparseArray} to iterate over.
 	 * @throws IllegalArgumentException If the given {@link LongSparseArray} is {@literal null}.
 	 */
 	public LongSparseArrayIterator(LongSparseArray<? extends Payload> array) throws IllegalArgumentException {
 		if (null == array) {
-			throw new IllegalArgumentException("array is null");
+			throw new IllegalArgumentException("The given array is null");
 		}
 		this.array = array;
 	}
 
 	public boolean hasNext() {
-		return array.size() != index + 1;
+		return index < array.size();
 	}
 
 	public Entry<Long, Payload> next() throws NoSuchElementException {
 		if (!hasNext()) {
-			throw new NoSuchElementException("LongSparseArrayIterator has no further element");
+			throw new NoSuchElementException("This iterator has no next element");
 		}
-		index++;
+		int index = this.index++;
 		return new Entry<>(array.keyAt(index), array.valueAt(index));
 	}
-
-	public void remove() throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("Cannot remove from a LongSparseArrayIterator");
-	}
-
 
 }

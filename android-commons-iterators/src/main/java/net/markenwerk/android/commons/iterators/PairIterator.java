@@ -24,28 +24,27 @@ package net.markenwerk.android.commons.iterators;
 
 import android.util.Pair;
 
-import net.markenwerk.commons.iterators.ProtectedIterator;
+import net.markenwerk.commons.iterators.AbstractProtectedIterator;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
 /**
- * An {@link PairIterator} is a {@link Iterator} that iterates over a given
+ * A {@link PairIterator} is an {@link AbstractProtectedIterator} that iterates over a given
  * {@link Pair}, where both components have a common super type.
  *
  * @param <Payload> The payload type.
  * @author Torsten Krause (tk at markenwerk dot net)
  * @since 2.2.0
  */
-public final class PairIterator<Payload> implements ProtectedIterator<Payload> {
+public final class PairIterator<Payload> extends AbstractProtectedIterator<Payload> {
 
 	private final Pair<? extends Payload, ? extends Payload> pair;
 
-	private int index = -1;
+	private int index;
 
 	/**
-	 * Creates a new {@link PairIterator} that iterates over the given {@link Pair}.
+	 * Creates a new {@link PairIterator}.
 	 *
 	 * @param pair The {@link Pair} to iterate over.
 	 * @throws IllegalArgumentException If the given {@link Pair} is {@literal null}.
@@ -53,7 +52,7 @@ public final class PairIterator<Payload> implements ProtectedIterator<Payload> {
 	public PairIterator(Pair<? extends Payload, ? extends Payload> pair) throws
 		IllegalArgumentException {
 		if (null == pair) {
-			throw new IllegalArgumentException("pair is null");
+			throw new IllegalArgumentException("The given pair is null");
 		}
 		this.pair = pair;
 	}
@@ -63,17 +62,14 @@ public final class PairIterator<Payload> implements ProtectedIterator<Payload> {
 	}
 
 	public Payload next() throws NoSuchElementException {
-		switch (++index) {
+		switch (index++) {
 			case 0:
 				return pair.first;
 			case 1:
 				return pair.second;
 			default:
-				throw new NoSuchElementException("PairIterator has no further element");
+				throw new NoSuchElementException("This iterator has no next element");
 		}
 	}
 
-	public void remove() {
-		throw new UnsupportedOperationException("Cannot remove from a PairIterator");
-	}
 }
