@@ -95,7 +95,7 @@ uploadArchives {
             }
 
             pom.project {
-                name "net.markenwerk:commons-iterators"
+                name "net.markenwerk:android-commons-iterators"
                 description "Some common iterators for Android"
                 url "https://github.com/markenwerk/android-commons-iterators"
                 inceptionYear '2016'
