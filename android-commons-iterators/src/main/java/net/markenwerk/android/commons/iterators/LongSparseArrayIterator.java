@@ -44,7 +44,7 @@ public final class LongSparseArrayIterator<Payload> extends AbstractProtectedIte
 
 	private final LongSparseArray<? extends Payload> array;
 
-	private int index = -1;
+	private int index;
 
 	/**
 	 * Creates a new {@link LongSparseArrayIterator}.

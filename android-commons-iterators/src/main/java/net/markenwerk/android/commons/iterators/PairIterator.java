@@ -58,7 +58,7 @@ public final class PairIterator<Payload> extends AbstractProtectedIterator<Paylo
 	}
 
 	public boolean hasNext() {
-		return index < 1;
+		return index < 2;
 	}
 
 	public Payload next() throws NoSuchElementException {
