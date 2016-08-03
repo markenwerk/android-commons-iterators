@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -97,7 +97,12 @@ var activeTableTab = "activeTableTab";
 <li><a href="http://d.android.com/reference/java/lang/Object.html?is-external=true" title="class or interface in java.lang">java.lang.Object</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="https://markenwerk.github.io/java-commons-iterators/net/markenwerk/commons/iterators/AbstractProtectedIterator.html?is-external=true" title="class or interface in net.markenwerk.commons.iterators">net.markenwerk.commons.iterators.AbstractProtectedIterator</a>&lt;Payload&gt;</li>
+<li>
+<ul class="inheritance">
 <li>net.markenwerk.android.commons.iterators.PairIterator&lt;Payload&gt;</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -115,9 +120,8 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public final class <span class="typeNameLabel">PairIterator&lt;Payload&gt;</span>
-extends <a href="http://d.android.com/reference/java/lang/Object.html?is-external=true" title="class or interface in java.lang">Object</a>
-implements <a href="https://markenwerk.github.io/java-commons-iterators/net/markenwerk/commons/iterators/ProtectedIterator.html?is-external=true" title="class or interface in net.markenwerk.commons.iterators">ProtectedIterator</a>&lt;Payload&gt;</pre>
-<div class="block">An <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="class in net.markenwerk.android.commons.iterators"><code>PairIterator</code></a> is a <a href="http://d.android.com/reference/java/util/Iterator.html?is-external=true" title="class or interface in java.util"><code>Iterator</code></a> that iterates over a given
+extends <a href="https://markenwerk.github.io/java-commons-iterators/net/markenwerk/commons/iterators/AbstractProtectedIterator.html?is-external=true" title="class or interface in net.markenwerk.commons.iterators">AbstractProtectedIterator</a>&lt;Payload&gt;</pre>
+<div class="block">A <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="class in net.markenwerk.android.commons.iterators"><code>PairIterator</code></a> is an <a href="https://markenwerk.github.io/java-commons-iterators/net/markenwerk/commons/iterators/AbstractProtectedIterator.html?is-external=true" title="class or interface in net.markenwerk.commons.iterators"><code>AbstractProtectedIterator</code></a> that iterates over a given
  <a href="http://d.android.com/reference/android/util/Pair.html?is-external=true" title="class or interface in android.util"><code>Pair</code></a>, where both components have a common super type.</div>
 <dl>
 <dt><span class="simpleTagLabel">Since:</span></dt>
@@ -142,7 +146,7 @@ implements <a href="https://markenwerk.github.io/java-commons-iterators/net/mark
 </tr>
 <tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html#PairIterator-android.util.Pair-">PairIterator</a></span>(<a href="http://d.android.com/reference/android/util/Pair.html?is-external=true" title="class or interface in android.util">Pair</a>&lt;? extends <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>,? extends <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>&gt;&nbsp;pair)</code>
-<div class="block">Creates a new <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="class in net.markenwerk.android.commons.iterators"><code>PairIterator</code></a> that iterates over the given <a href="http://d.android.com/reference/android/util/Pair.html?is-external=true" title="class or interface in android.util"><code>Pair</code></a>.</div>
+<div class="block">Creates a new <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="class in net.markenwerk.android.commons.iterators"><code>PairIterator</code></a>.</div>
 </td>
 </tr>
 </table>
@@ -168,11 +172,14 @@ implements <a href="https://markenwerk.github.io/java-commons-iterators/net/mark
 <td class="colFirst"><code><a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html#next--">next</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html#remove--">remove</a></span>()</code>&nbsp;</td>
-</tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.net.markenwerk.commons.iterators.AbstractProtectedIterator">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;net.markenwerk.commons.iterators.<a href="https://markenwerk.github.io/java-commons-iterators/net/markenwerk/commons/iterators/AbstractProtectedIterator.html?is-external=true" title="class or interface in net.markenwerk.commons.iterators">AbstractProtectedIterator</a></h3>
+<code><a href="https://markenwerk.github.io/java-commons-iterators/net/markenwerk/commons/iterators/AbstractProtectedIterator.html?is-external=true#remove--" title="class or interface in net.markenwerk.commons.iterators">remove</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
@@ -209,7 +216,7 @@ implements <a href="https://markenwerk.github.io/java-commons-iterators/net/mark
 <h4>PairIterator</h4>
 <pre>public&nbsp;PairIterator(<a href="http://d.android.com/reference/android/util/Pair.html?is-external=true" title="class or interface in android.util">Pair</a>&lt;? extends <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>,? extends <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>&gt;&nbsp;pair)
              throws <a href="http://d.android.com/reference/java/lang/IllegalArgumentException.html?is-external=true" title="class or interface in java.lang">IllegalArgumentException</a></pre>
-<div class="block">Creates a new <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="class in net.markenwerk.android.commons.iterators"><code>PairIterator</code></a> that iterates over the given <a href="http://d.android.com/reference/android/util/Pair.html?is-external=true" title="class or interface in android.util"><code>Pair</code></a>.</div>
+<div class="block">Creates a new <a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="class in net.markenwerk.android.commons.iterators"><code>PairIterator</code></a>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>pair</code> - The <a href="http://d.android.com/reference/android/util/Pair.html?is-external=true" title="class or interface in android.util"><code>Pair</code></a> to iterate over.</dd>
@@ -233,40 +240,19 @@ implements <a href="https://markenwerk.github.io/java-commons-iterators/net/mark
 <li class="blockList">
 <h4>hasNext</h4>
 <pre>public&nbsp;boolean&nbsp;hasNext()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="http://d.android.com/reference/java/util/Iterator.html?is-external=true#hasNext--" title="class or interface in java.util">hasNext</a></code>&nbsp;in interface&nbsp;<code><a href="http://d.android.com/reference/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</a>&lt;<a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>&gt;</code></dd>
-</dl>
 </li>
 </ul>
 <a name="next--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>next</h4>
 <pre>public&nbsp;<a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>&nbsp;next()
              throws <a href="http://d.android.com/reference/java/util/NoSuchElementException.html?is-external=true" title="class or interface in java.util">NoSuchElementException</a></pre>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="http://d.android.com/reference/java/util/Iterator.html?is-external=true#next--" title="class or interface in java.util">next</a></code>&nbsp;in interface&nbsp;<code><a href="http://d.android.com/reference/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</a>&lt;<a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>&gt;</code></dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
 <dd><code><a href="http://d.android.com/reference/java/util/NoSuchElementException.html?is-external=true" title="class or interface in java.util">NoSuchElementException</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="remove--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>remove</h4>
-<pre>public&nbsp;void&nbsp;remove()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="http://d.android.com/reference/java/util/Iterator.html?is-external=true#remove--" title="class or interface in java.util">remove</a></code>&nbsp;in interface&nbsp;<code><a href="http://d.android.com/reference/java/util/Iterator.html?is-external=true" title="class or interface in java.util">Iterator</a>&lt;<a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="https://markenwerk.github.io/java-commons-iterators/net/markenwerk/commons/iterators/ProtectedIterator.html?is-external=true#remove--" title="class or interface in net.markenwerk.commons.iterators">remove</a></code>&nbsp;in interface&nbsp;<code><a href="https://markenwerk.github.io/java-commons-iterators/net/markenwerk/commons/iterators/ProtectedIterator.html?is-external=true" title="class or interface in net.markenwerk.commons.iterators">ProtectedIterator</a>&lt;<a href="../../../../../net/markenwerk/android/commons/iterators/PairIterator.html" title="type parameter in PairIterator">Payload</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
